@@ -52,3 +52,11 @@ next-env.d.ts
 *.bak
 *.swp
 *~
+
+# Firebase
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+firebase.json
+.firebaserc
+.firebase/
