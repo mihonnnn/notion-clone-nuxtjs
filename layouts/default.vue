@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <slot />
+  <div class="min-h-screen bg-gray-50 flex flex-col">
+    <LayoutHeader />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <LayoutFooter />
   </div>
 </template>
 

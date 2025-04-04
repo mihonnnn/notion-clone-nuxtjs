@@ -8,9 +8,10 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "deploy": "yarn build && firebase deploy --only hosting"
+    "deploy": "yarn generate && firebase deploy --only hosting"
   },
   "dependencies": {
+    "@nuxt/ui": "^3.0.2",
     "firebase": "^11.6.0",
     "nuxt": "^3.16.2",
     "vue": "^3.5.13",

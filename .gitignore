@@ -8,17 +8,47 @@ dist
 
 # Node dependencies
 node_modules
+.pnpm-store/
 
 # Logs
 logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# Misc
+# Editor directories and files
 .DS_Store
 .fleet
 .idea
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # Local env files
 .env
 .env.*
 !.env.example
+
+# Testing
+coverage
+.nyc_output
+
+# Build files
+*.tsbuildinfo
+next-env.d.ts
+
+# Misc
+*.pem
+*.tmp
+*.bak
+*.swp
+*~
