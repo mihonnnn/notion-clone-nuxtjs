@@ -1,6 +1,10 @@
 import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
@@ -15,14 +19,16 @@ export default defineNuxtPlugin(() => {
   };
 
   const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
   const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  setPersistence(auth, browserLocalPersistence);
 
   return {
     provide: {
       firebase: {
-        db,
         auth,
+        db,
       },
     },
   };

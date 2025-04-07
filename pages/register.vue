@@ -1,7 +1,7 @@
 <!-- pages/register.vue -->
 <template>
   <div class="max-w-md mx-auto p-8 bg-white rounded-lg shadow-md mt-10">
-    <h1 class="text-2xl font-bold text-center mb-8">アカウント登録</h1>
+    <h1 class="text-xl font-bold text-center mb-8">アカウント登録</h1>
 
     <form @submit.prevent="register">
       <div class="mb-4">
@@ -14,7 +14,7 @@
           type="email"
           required
           placeholder="example@example.com"
-          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" />
       </div>
 
       <div class="mb-4">
@@ -29,7 +29,7 @@
           type="password"
           required
           placeholder="6文字以上のパスワード"
-          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" />
       </div>
 
       <div class="mb-4">
@@ -44,7 +44,7 @@
           type="password"
           required
           placeholder="もう一度パスワードを入力"
-          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" />
       </div>
 
       <div v-if="!passwordsMatch" class="mb-4 text-sm text-red-600">
@@ -63,7 +63,7 @@
       </button>
     </form>
 
-    <div class="mt-6 text-center text-gray-600 text-sm">
+    <div class="mt-6 text-center text-gray-800 text-sm">
       すでにアカウントをお持ちの方は
       <NuxtLink to="/login" class="text-blue-600 hover:underline"
         >こちらからログイン</NuxtLink

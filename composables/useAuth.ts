@@ -9,17 +9,19 @@ import {
   type User,
 } from "firebase/auth";
 import { ref, reactive, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
 export const useAuth = () => {
+  const router = useRouter();
   const { $firebase } = useNuxtApp();
   const auth = $firebase.auth;
 
   const user = ref<User | null>(null);
   const loading = ref(true);
   const error = reactive({
-    login: null,
-    register: null,
-    logout: null,
+    login: "" as string | null,
+    register: "" as string | null,
+    logout: "" as string | null,
   });
 
   // ユーザー状態の監視
@@ -68,7 +70,9 @@ export const useAuth = () => {
       user.value = userCredential.user;
       return userCredential;
     } catch (e: any) {
+      console.error("ログインエラー:", e);
       error.login = e.message;
+      loading.value = false;
       throw e;
     } finally {
       loading.value = false;
@@ -86,7 +90,9 @@ export const useAuth = () => {
       user.value = userCredential.user;
       return userCredential;
     } catch (e: any) {
+      console.error("Googleログインエラー:", e);
       error.login = e.message;
+      loading.value = false;
       throw e;
     } finally {
       loading.value = false;
@@ -100,6 +106,8 @@ export const useAuth = () => {
     try {
       await signOut(auth);
       user.value = null;
+      await logout();
+      router.push("/login");
     } catch (e: any) {
       error.logout = e.message;
       throw e;

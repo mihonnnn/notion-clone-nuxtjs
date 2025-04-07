@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     transpile: ["firebase", "firebase/auth", "firebase/firestore"],
   },
   css: ["~/assets/css/main.css"],
-  modules: ["@nuxt/ui"],
+  modules: ["@nuxt/ui", "@pinia/nuxt"],
   colorMode: {
     classSuffix: "",
     preference: "system",

@@ -25,7 +25,7 @@ onMounted(async () => {
   if (route.path === "/") {
     if (user.value) {
       // 認証済みユーザーはindexページへ
-      router.push("/index");
+      router.push("/");
     } else {
       // 未認証ユーザーはウェルカムページへ
       router.push("/welcome");
