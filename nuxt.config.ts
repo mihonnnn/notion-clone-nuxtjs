@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
   devtools: { enabled: false },
   build: {
-    transpile: ["firebase", "firebase/auth", "firebase/firestore"],
+    transpile: ["firebase", "firebase/auth", "firebase/firestore", "lucide-vue-next"],
   },
   css: ["~/assets/css/main.css"],
   modules: ["@nuxt/ui"],
