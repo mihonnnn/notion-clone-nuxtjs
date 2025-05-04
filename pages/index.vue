@@ -1,42 +1,64 @@
-<!-- pages/index.vue -->
 <template>
   <div class="container mx-auto px-4 py-8">
-    <h1>表示成功</h1>
-    <!-- <div v-if="user" class="max-w-4xl mx-auto">
-      <h1 class="text-3xl font-bold mb-6">ホームページ</h1>
-      <div class="bg-white rounded-lg shadow-md p-6">
-        <p class="text-lg mb-4">ようこそ</p>
-        <p class="text-gray-600 mb-6">
-          ログインに成功しました。このページは認証済みユーザーのみが閲覧できます。
-        </p>
-        <button
-          @click="handleLogout"
-          class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-          ログアウト
+    <div class="bg-white rounded-lg shadow-md p-6 w-1/2 m-auto">
+      <h2 class="text-lg font-medium mb-4">
+        新しいノートを作成してみましょう
+      </h2>
+      <div class="flex gap-2">
+        <input
+          v-model="noteTitle"
+          placeholder="ノートのタイトルを入力"
+          class="flex-1 border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button 
+          @click="createNote" 
+          :disabled="!noteTitle"
+          class="bg-blue-500 text-white px-4 py-2 rounded-md flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <PlusIcon class="h-4 w-4 mr-1" />
+          ノート作成
         </button>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-// import { useAuth } from "~/composables/useAuth";
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { Plus as PlusIcon } from 'lucide-vue-next';
+import { useAuth } from '~/composables/useAuth';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
-// const { user, logout } = useAuth();
-// const router = useRouter();
+// Firebase setup
+const { $firebase } = useNuxtApp();
+const db = $firebase.db;
 
-// // このページには認証が必要であることを指定
-// definePageMeta({
-//   middleware: "auth",
-//   requiresAuth: true,
-// });
+const { user } = useAuth();
+const router = useRouter();
+const noteTitle = ref('');
 
-// const handleLogout = async () => {
-//   try {
-//     await logout();
-//     router.push("/login");
-//   } catch (err) {
-//     console.error("ログアウトエラー:", err);
-//   }
-// };
+// This page requires authentication
+definePageMeta({
+  middleware: 'auth',
+  requiresAuth: true,
+});
+
+const createNote = async () => {
+  if (!noteTitle.value || !user.value) return;
+  
+  try {
+    const docRef = await addDoc(collection(db, 'notes'), {
+      title: noteTitle.value,
+      content: '',
+      userId: user.value.uid,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp()
+    });
+    
+    router.push(`/notes/${docRef.id}`);
+  } catch (error) {
+    console.error('Error creating note:', error);
+  }
+};
 </script>
